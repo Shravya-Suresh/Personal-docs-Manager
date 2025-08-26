@@ -40,4 +40,20 @@ CREATE TABLE IF NOT EXISTS users (
     password VARCHAR(255) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
     created_at TIMESTAMP NOT NULL DEFAULT current_timestamp()
-);```
+);
+```
+And to connect the codes to SQL, open signup-submit.php and signin-submit.php and modify the following lines of code 
+
+```
+$servername = "localhost";
+$username_db = ""; //add your XAMPP username
+$password_db = ""; //add your set XAMPP password
+$dbname = "storagereminder";
+```
+
+Also modify the below line in mail_reminder.php
+
+```
+$mysqli = new mysqli(hostname:"localhost", username:"", password:"", database:"storagereminder");
+```
+
