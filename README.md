@@ -18,7 +18,6 @@ The system provides a user-friendly interface to efficiently track and manage im
 - MongoDB for NoSQL document storage as not all fields will be filled
 - VS Code recommended for code editing
 
-
 **SQL (XAMPP) Set up**
 
 As mentioned earlier, XAMPP is used to store the useres' data, hence a database must be created, the commands for it ar as follows:
@@ -79,6 +78,16 @@ db.createCollection("agreements");
 db.createCollection("bills");
 db.createCollection("vouchers");
 ```
+
+### Steps to Implement
+
+1. Install XAMPP for MySQL and MongoDB for NoSQL.
+2. Start Apache and MySQL in XAMPP, and start the MongoDB server.
+3. Create the SQL database and users table using the provided queries.
+4. Create the MongoDB database and collections (warranty, agreements, bills, vouchers).
+5. Update database credentials in signup-submit.php, signin-submit.php, and mail_reminder.php.
+6. Open the project in VS Code and run it in a browser.
+7. Sign up, sign in, and start adding, updating, or deleting documents.
 
 ### Usage
 
