@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agreement Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .form-container {
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            max-width: 600px;
+            margin: auto;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            position: relative;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        input[type="text"], input[type="date"], select, textarea, input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        textarea {
+            resize: vertical;
+            height: 80px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 12px 20px;
+            background-color: #0c4464;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #5a32a3;
+        }
+        #agreement-image {
+            width: 100px;
+            height: 100px;
+            background-image: url('images/agreement.jpg'); 
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            position: absolute;
+            top: 10px;
+            left: 520px;
+        }
+        #logout{
+            position: fixed;
+            right: 20px;
+            top: 10px;
+            font-size: 20px;
+            color: #0c4464;
+            text-decoration: none; 
+        }
+
+        #mydetails{
+            position: fixed;
+            right: 120px;
+            top: 10px;
+            font-size: 20px;
+            color: #0c4464;
+            text-decoration: none; 
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <a href = "signin-page.html" id = "logout">Log Out</a>
+    <a href = "mydetails.html" id = "mydetails">My Details</a>
+
+    <div class="form-container">
+        <div id="agreement-image"></div>
+        <h2>Agreement Details Form</h2>
+        <form action="php_files/agreement-submit.php" method="post" enctype="multipart/form-data">
+
+            <label for="agreement_name">Agreement Name / Title</label>
+            <input type="text" id="agreement_name" name="agreement_name" required>
+
+            <label for="agreement_number">Agreement Number</label>
+            <input type="text" id="agreement_number" name="agreement_number">
+
+            <label for="party_one">Party One</label>
+            <input type="text" id="party_one" name="party_one" required>
+
+            <label for="party_two">Party Two</label>
+            <input type="text" id="party_two" name="party_two" required>
+
+            <label for="agreement_type">Agreement Type</label>
+            <select id="agreement_type" name="agreement_type" required>
+                <option value="">--Select Type--</option>
+                <option value="Lease">Lease</option>
+                <option value="Service">Service</option>
+                <option value="NDA">NDA</option>
+                <option value="Other">Other</option>
+            </select>
+
+            <label for="start_date">Start Date</label>
+            <input type="date" id="start_date" name="start_date" required>
+
+            <label for="end_date">End Date</label>
+            <input type="date" id="end_date" name="end_date" required>
+
+            <label for="notes">Notes / Special Clauses</label>
+            <textarea id="notes" name="notes" placeholder="Any additional information..."></textarea>
+
+            <label for="agreement_file">Upload Agreement Document</label>
+            <input type="file" id="agreement_file" name="agreement_file" accept=".pdf,.doc,.docx,.jpg,.png" required>
+
+            <script>
+                const form = document.querySelector('form');
+                const startInput = document.getElementById('start_date');
+                const endInput = document.getElementById('end_date');
+
+                // Validate end date is not before start date
+                form.addEventListener('submit', function(e){
+                    const startDate = new Date(startInput.value);
+                    const endDate = new Date(endInput.value);
+
+                    if(endDate < startDate){
+                        e.preventDefault();
+                        endInput.setCustomValidity("End date cannot be before start date");
+                        endInput.reportValidity();
+                    } else {
+                        endInput.setCustomValidity("");
+                    }
+                });
+            </script>
+
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

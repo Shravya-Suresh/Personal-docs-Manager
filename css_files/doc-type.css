@@ -1,0 +1,76 @@
+#main-part{
+    background-image: url('../images/main-page-bg.png');
+    background-repeat: no-repeat;
+    background-size: cover; 
+    background-position: top;  
+    width: 100%;
+    height: 100vh;       
+}
+
+#image-add {
+    width: 400px;   
+    height: 400px; 
+    background-image: url('../images/note-image.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: absolute;
+    bottom: 20px;
+    right: 30px;
+}
+
+#title{
+    top: 200px;
+    left: 90px;
+    color: #0c4464;
+    font-weight: bold;
+    font-size: 20px;
+    position: relative;
+}
+
+#doc-type{
+    width: 500px;
+    height: 50px;
+    top: 250px;
+    left: 90px;
+    position: relative;
+    border-radius: 5px;
+}
+
+#button{
+    background-color: #0c4464;
+    color: white;
+    position: relative;
+    top: 400px;
+    left: 100px;
+    height: 50px;
+    width: 80px;
+    font-size: 15px;
+    border-radius: 10px;
+}
+
+#logout{
+    position: fixed;
+    right: 20px;
+    top: 10px;
+    font-size: 20px;
+    color: white;
+    text-decoration: none; 
+}
+
+#mydetails{
+    position: fixed;
+    right: 120px;
+    top: 10px;
+    font-size: 20px;
+    color: white;
+    text-decoration: none; 
+}
+
+#greeting{
+    font-size: 30px;
+    color: #0c4464;
+    position: fixed;
+    top: 10px;   
+    left: 10px;
+}

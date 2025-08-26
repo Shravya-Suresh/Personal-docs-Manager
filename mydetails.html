@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Details</title>
+<style>
+    body { 
+        font-family: Arial, sans-serif; 
+        background-color: #f4f4f4; 
+        margin: 0; 
+        padding: 0; 
+    }
+
+    .container { 
+        max-width: 1000px; 
+        margin: 50px auto; 
+        padding: 0 20px;
+    }
+
+    h1 {
+        text-align: center;
+        color: #0c4464;
+        margin-bottom: 40px;
+    }
+
+    .menu { 
+        display: flex; 
+        justify-content: space-around; 
+        margin-bottom: 30px; 
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .menu button { 
+        flex: 1 1 200px;
+        padding: 20px; 
+        font-size: 18px; 
+        border: none; 
+        border-radius: 8px; 
+        cursor: pointer; 
+        transition: 0.3s; 
+        color: white;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
+    .menu button:hover { 
+        transform: scale(1.05); 
+    }
+
+    .warranties { background-color: #0c4464; }
+    .bills      { background-color: #218838; }
+    .agreements { background-color: #5a32a3; }
+    .vouchers   { background-color: #e06c00; }
+
+    .content { 
+        background-color: #fff; 
+        padding: 30px; 
+        border-radius: 8px; 
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2); 
+        min-height: 300px;
+    }
+
+    /* Accordion */
+    .accordion-item {
+        background: #f9f9f9;
+        border-radius: 6px;
+        margin-bottom: 12px;
+        border: 1px solid #ddd;
+        overflow: hidden;
+    }
+
+    .accordion-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 20px;
+        cursor: pointer;
+        font-weight: bold;
+        color: #333;
+        background: #e9f0f5;
+    }
+
+    .accordion-header:hover {
+        background: #d8e5ef;
+    }
+
+    .accordion-arrow {
+        transition: transform 0.3s ease;
+    }
+
+    .accordion-arrow.rotate {
+        transform: rotate(90deg);
+    }
+
+    .accordion-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease;
+        padding: 0 20px;
+        color: #555;
+        background: white;
+    }
+
+    .accordion-content p {
+        margin: 12px 0;
+    }
+
+    .accordion-content.open {
+        padding: 15px 20px;
+    }
+    #logout{
+            position: fixed;
+            right: 20px;
+            top: 10px;
+            font-size: 20px;
+            color: #0c4464;
+            text-decoration: none; 
+    }
+    #doc-types{
+        position: fixed;
+        right: 120px;
+        top: 10px;
+        font-size: 20px;
+        color: #0c4464;
+        text-decoration: none;
+    }
+    .delete-btn {
+        background-color: #dc3545; /* red */
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 8px 12px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: 0.2s;
+    }
+
+    .delete-btn:hover {
+        background-color: #c82333;
+    }
+
+
+</style>
+</head>
+<body>
+    <a href = "signin-page.html" id = "logout">Log Out</a>
+    <a href = "php_files/doc-type.php" id = "doc-types">Fill document details</a>
+
+<div class="container">
+    <h1>My Documents</h1>
+
+    <div class="menu">
+        <button class="warranties" onclick="loadDetails('warranty')">Warranties</button>
+        <button class="bills" onclick="loadDetails('bill')">Bills</button>
+        <button class="agreements" onclick="loadDetails('agreement')">Agreements</button>
+        <button class="vouchers" onclick="loadDetails('voucher')">Vouchers</button>
+    </div>
+
+    <div class="content" id="details">
+        <p>Select a document type above to view your stored details here.</p>
+    </div>
+</div>
+
+<script>
+function loadDetails(type) {
+    const content = document.getElementById('details');
+
+    if(type === 'warranty'){
+        fetch('php_files/fetch-warranty.php')
+        .then(response => response.json())
+        .then(data => {
+            if(data.length === 0){
+                content.innerHTML = "<p>No warranty records found.</p>";
+                return;
+            }
+
+            let html = `<h2>My Warranties</h2>`;
+            data.forEach((warranty, index) => {
+                html += `
+                    <div class="accordion-item">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <span>Warranty #${index+1} - ${warranty.product_name}</span>
+                            <span class="accordion-arrow">▶</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p><b>Product:</b> ${warranty.product_name}</p>
+                            <p><b>Company:</b> ${warranty.company}</p>
+                            <p><b>Purchase Date:</b> ${warranty.purchase_date}</p>
+                            <p><b>Expiry Date:</b> ${warranty.expiry_date}</p>
+                            <p><b>Warranty Period:</b> ${warranty.warranty_period} years</p>
+                            <p><b>Notes:</b> ${warranty.notes}</p>
+                            <p><button class="delete-btn" onclick="deleteItem('warranty', '${warranty._id}', this)">Delete</button></p>
+                        </div>
+                    </div>
+                `;
+            });
+
+            content.innerHTML = html;
+        })
+        .catch(err => {
+            content.innerHTML = "<p>Error fetching warranty details.</p>";
+            console.error(err);
+        });
+    } 
+    else if(type === 'bill'){
+        fetch('php_files/fetch-bill.php')
+        .then(response => response.json())
+        .then(data => {
+            if(data.length === 0){
+                content.innerHTML = "<p>No bill records found.</p>";
+                return;
+            }
+
+            let html = `<h2>My Bills</h2>`;
+            data.forEach((bill, index) => {
+                html += `
+                    <div class="accordion-item">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <span>Bill #${index+1} - ${bill.bill_name}</span>
+                            <span class="accordion-arrow">▶</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p><b>Company:</b> ${bill.company}</p>
+                            <p><b>Bill Number:</b> ${bill.bill_number}</p>
+                            <p><b>Amount:</b> ${bill.amount}</p>
+                            <p><b>Issue Date:</b> ${bill.issue_date}</p>
+                            <p><b>Due Date:</b> ${bill.due_date}</p>
+                            <p><b>Status:</b> ${bill.payment_status}</p>
+                            <p><b>Notes:</b> ${bill.notes}</p>
+                            <button class="delete-btn" onclick="deleteItem('bill', '${bill._id}', this)">Delete</button>
+                            ${bill.receipt ? `<p><b>Receipt:</b> <a href="${bill.receipt}" target="_blank">View</a></p>` : ""}
+                        </div>
+                    </div>
+                `;
+            });
+
+            content.innerHTML = html;
+        })
+        .catch(err => {
+            content.innerHTML = "<p>Error fetching bill details.</p>";
+            console.error(err);
+        });
+    }
+    else if(type === 'agreement'){
+        fetch('php_files/fetch-agreement.php')
+        .then(response => response.json())
+        .then(data => {
+            if(data.length === 0){
+                content.innerHTML = "<p>No agreement records found.</p>";
+                return;
+            }
+
+            let html = `<h2>My Agreements</h2>`;
+            data.forEach((agreement, index) => {
+                html += `
+                    <div class="accordion-item">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <span>Agreement #${index+1} - ${agreement.agreement_name}</span>
+                            <span class="accordion-arrow">▶</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p><b>Agreement Name:</b> ${agreement.agreement_name}</p>
+                            <p><b>Agreement Number:</b> ${agreement.agreement_number}</p>
+                            <p><b>Party One:</b> ${agreement.party_one}</p>
+                            <p><b>Party Two:</b> ${agreement.party_two}</p>
+                            <p><b>Agreement Type:</b> ${agreement.agreement_type}</p>
+                            <p><b>Start Date:</b> ${agreement.start_date}</p>
+                            <p><b>End Date:</b> ${agreement.end_date}</p>
+                            <p><b>Notes:</b> ${agreement.notes}</p>
+                            <p><b>Document:</b> 
+                            <button class="delete-btn" onclick="deleteItem('agreement', '${agreement._id}', this)">Delete</button>
+                                ${agreement.agreement_file ? `<a href="uploads/${agreement.agreement_file}" target="_blank">View File</a>` : 'No file uploaded'}
+                            </p>
+                        </div>
+                    </div>
+                `;
+            });
+
+            content.innerHTML = html;
+        })
+        .catch(err => {
+            content.innerHTML = "<p>Error fetching agreement details.</p>";
+            console.error(err);
+        });
+    }
+    else if(type === 'voucher'){
+        fetch('php_files/fetch-voucher.php')
+        .then(response => response.json())
+        .then(data => {
+            const content = document.getElementById('details');
+
+            if(data.length === 0){
+                content.innerHTML = "<p>No voucher records found.</p>";
+                return;
+            }
+
+            let html = `<h2>My Vouchers</h2>`;
+            data.forEach((voucher, index) => {
+                html += `
+                    <div class="accordion-item">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <span>Voucher #${index+1} - ${voucher.voucher_name}</span>
+                            <span class="accordion-arrow">▶</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p><b>Voucher Name:</b> ${voucher.voucher_name}</p>
+                            <p><b>Voucher Number:</b> ${voucher.voucher_number}</p>
+                            <p><b>Company:</b> ${voucher.company}</p>
+                            <p><b>Value:</b> $${voucher.value}</p>
+                            <p><b>Voucher Type:</b> ${voucher.voucher_type}</p>
+                            <p><b>Issue Date:</b> ${voucher.issue_date}</p>
+                            <p><b>Expiry Date:</b> ${voucher.expiry_date}</p>
+                            <p><b>Notes:</b> ${voucher.notes}</p>
+                            <button class="delete-btn" onclick="deleteItem('voucher', '${voucher._id}', this)">Delete</button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            content.innerHTML = html;
+        })
+        .catch(err => {
+            const content = document.getElementById('details');
+            content.innerHTML = "<p>Error fetching voucher details.</p>";
+            console.error(err);
+        });
+    }
+
+}
+
+
+function toggleAccordion(header) {
+    const content = header.nextElementSibling;
+    const arrow = header.querySelector(".accordion-arrow");
+
+    if (content.style.maxHeight) {
+        // Collapse
+        content.style.maxHeight = null;
+        content.classList.remove("open");
+        arrow.classList.remove("rotate");
+    } else {
+        // Expand
+        content.style.maxHeight = content.scrollHeight + "px";
+        content.classList.add("open");
+        arrow.classList.add("rotate");
+    }
+}
+
+function deleteItem(type, id, btn) {
+    if (!confirm("Are you sure you want to delete this item?")) return;
+
+    fetch(`php_files/delete.php?type=${type}&id=${id}`, {
+        method: 'GET' // or 'POST' if your PHP expects POST
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Remove the accordion item from the DOM
+            const accordionItem = btn.closest('.accordion-item');
+            accordionItem.remove();
+        } else {
+            alert("Failed to delete the item: " + (data.error || ""));
+        }
+    })
+    .catch(err => {
+        console.error(err);
+        alert("Error deleting the item.");
+    });
+}
+
+
+</script>
+
+</body>
+</html>
+

@@ -1,0 +1,35 @@
+<html>
+    <body id = "signup-page-body">
+
+    <div id = "box">
+        <h1 style = "position: relative;
+                        left: 100px;
+                        bottom: 10px">Sign up</h1>
+
+        <form id="main-box" action="php_files/signup-submit.php" method="post">
+                <label for="firstname" id = "firstname-label">First name:</label>
+                <input type="text" id="firstname" name="firstname" placeholder="Enter first name">
+
+                <label for="lastname" id ="lastname-label">Last Name:</label>
+                <input type="text" id="lastname" name="lastname" placeholder="Enter last name">
+
+                <label for="username" id="username-label">Create a Username:</label>
+                <input type="text" id="username" name="username" placeholder="Create a Username">
+
+                <label for="create-password" id="create-password-label">Create a Password:</label>
+                <input type="password" id="create-password" name="create-password" placeholder="Create a password">
+
+                <label for="confirm-password" id="confirm-password-label">Confirm Password:</label>
+                <input type="password" id="confirm-password" name="confirm-password" placeholder="Enter the password again">
+
+                <label for="email" id="email-label">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Enter Email address">
+
+                <input type="submit" value="Sign Up" id="button">
+         </form>
+    </div>
+
+    <link rel="stylesheet" href="css_files/signuppage-style.css"> 
+
+    </body>
+</html>

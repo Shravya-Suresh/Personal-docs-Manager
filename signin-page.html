@@ -1,0 +1,28 @@
+<html>
+    <body id = "signin-page-body">
+
+        <div id = 'box'>
+
+            <h1 style = "position: fixed;
+                        right: 250px;
+                        top: 100px;"> Sign In</h1>
+
+            <form id="main-box" action="php_files/signin-submit.php" method="post">
+                <label for="username" id = "username-label">Username:</label>
+                <input type="text" id="username" name="username" placeholder="Enter username">
+
+                <label for="password" id ="password-label">Password:</label>
+                <input type="password" id="password" name="password" placeholder="Enter password">
+
+                <input type="submit" value="Sign In" id="button">
+            </form>
+
+            <p id="signup-link">
+                or <a href="signup-page.html">Sign Up</a>
+            </p>
+
+        </div>
+        
+        <link rel="stylesheet" href="css_files/signinpage-style.css">
+    </body>
+</html>

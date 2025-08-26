@@ -1,0 +1,70 @@
+#signin-page-body{
+    background-image:url('../images/bg.png');
+    background-size:contain;
+    background-repeat: no-repeat;
+    background-position: left;
+}
+
+#box{
+    width: 300px;         
+    height: 400px;        
+    background-color: lightgray; 
+    padding: 20px;       
+    border-radius: 10px;  
+    margin: 50px auto; 
+    margin-right: 125px;
+}
+
+#main-box{
+    display: flex;
+    gap: 15px;
+    flex-direction: column; 
+}
+
+#username {      
+    background-color: white;
+    padding: 8px;
+    border-radius: 5px;
+    font-size: 16px;
+    position: fixed;
+    top: 200px;
+}
+
+#username-label{
+    position: fixed;
+    top: 180px;
+}
+
+#password{
+    background-color: white;
+    padding: 8px;
+    border-radius: 5px;
+    font-size: 16px;
+    position: fixed;
+    top: 270px;
+}
+
+#password-label{
+    position: fixed;
+    top: 250px;
+}
+
+#signup-link{
+    position: fixed;
+    top: 400px;
+    font-size: 15px;
+    right: 270px;
+}
+
+#button {
+    background-color: #0c4464;
+    color: white;
+    position: fixed;  
+    top: 350px;
+    right: 250px;
+    height: 40px;
+    width: 100px;
+    font-size: 15px;
+    border-radius: 10px;
+    cursor: pointer;
+}

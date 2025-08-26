@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warranty Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .form-container {
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            max-width: 600px;
+            margin: auto;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        input[type="text"], input[type="date"], select, textarea, input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        textarea {
+            resize: vertical;
+            height: 80px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 12px 20px;
+            background-color: #0c4464;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #warranty-image{
+            width: 100px;
+            height: 100px;
+            top: 40px;
+            right: 350px;
+            background-image: url('images/warranty.jpg');
+            position: absolute;
+            background-size: contain; /* fit image inside div */
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        #logout{
+            position: fixed;
+            right: 20px;
+            top: 10px;
+            font-size: 20px;
+            color: #0c4464;
+            text-decoration: none; 
+        }
+
+        #mydetails{
+            position: fixed;
+            right: 120px;
+            top: 10px;
+            font-size: 20px;
+            color: #0c4464;
+            text-decoration: none; 
+        }
+    </style>
+</head>
+<body>
+
+    <a href = "signin-page.html" id = "logout">Log Out</a>
+    <a href = "mydetails.html" id = "mydetails">My Details</a>
+
+    <div class="form-container">
+        <div id = "warranty-image">
+
+        </div>
+        <h2>Warranty Details Form</h2>
+        <form action="php_files/warranty-submit.php" method="post" enctype="multipart/form-data">
+            
+            <label for="company">Company</label>
+            <input type="text" id="company" name="company" required>
+
+            <label for="product_name">Product Name</label>
+            <input type="text" id="product_name" name="product_name" required>
+
+            <label for="product_type">Product Type</label>
+            <select id="product_type" name="product_type" required>
+                <option value="">--Select Type--</option>
+                <option value="Electronics">Electronics</option>
+                <option value="Appliances">Appliances</option>
+                <option value="Furniture">Furniture</option>
+                <option value="Other">Other</option>
+            </select>
+
+            <label for="serial_number">Serial Number</label>
+            <input type="text" id="serial_number" name="serial_number">
+
+            <label for="purchase_date">Purchase Date</label>
+            <input type="date" id="purchase_date" name="purchase_date" required>
+
+            <label for="expiry_date">Expiry Date</label>
+            <input type="date" id="expiry_date" name="expiry_date" required>
+
+            <label for="warranty_period">Warranty Period (in Years)</label>
+            <input type="text" id="warranty_period" name="warranty_period" placeholder="Auto-calculated" readonly>
+
+            <script>
+                const warrantyInput = document.getElementById('warranty_period');
+                const form = document.querySelector('form');
+                const purchaseInput = document.getElementById('purchase_date');
+                const expiryInput = document.getElementById('expiry_date');
+
+                form.addEventListener('submit', function(e) {
+                    const purchaseDate = new Date(purchaseInput.value);
+                    const expiryDate = new Date(expiryInput.value);
+
+                    if (expiryDate < purchaseDate) {
+                        e.preventDefault(); // Stop form submission
+                        expiryInput.setCustomValidity("Expiry date cannot be before purchase date");
+                        expiryInput.reportValidity(); // Shows browser's small validation popup
+                    } else {
+                        expiryInput.setCustomValidity(""); // Clear any previous message
+                    }
+                });
+
+                function updateWarrantyPeriod() {
+                    const purchaseDate = new Date(purchaseInput.value);
+                    const expiryDate = new Date(expiryInput.value);
+
+                    if (purchaseDate && expiryDate && expiryDate >= purchaseDate) {
+                        // Calculate difference in years (including months as decimal)
+                        const diffTime = expiryDate - purchaseDate; // in milliseconds
+                        const diffYears = diffTime / (1000 * 60 * 60 * 24 * 365);
+                        warrantyInput.value = diffYears.toFixed(2); // e.g., 1.50 years
+                    } else {
+                        warrantyInput.value = ''; // clear if invalid
+                    }
+                }
+
+                // Update warranty period when either date changes
+                purchaseInput.addEventListener('change', updateWarrantyPeriod);
+                expiryInput.addEventListener('change', updateWarrantyPeriod);
+            </script>
+
+            <label for="notes">Notes</label>
+            <textarea id="notes" name="notes" placeholder="Any additional information..."></textarea>
+
+            <label for="receipt">Upload Receipt / Warranty Document</label>
+            <input type="file" id="receipt" name="receipt" accept=".pdf,.jpg,.png,.jpeg" required>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

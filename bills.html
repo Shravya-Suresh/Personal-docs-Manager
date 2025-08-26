@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bill Form</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            background-color: #f4f4f4; 
+            padding: 20px; 
+        }
+        .form-container { 
+            background-color: #fff; padding: 25px; 
+            border-radius: 8px; 
+            max-width: 600px; 
+            margin: auto; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2); 
+            position: relative; 
+        }
+        
+        h2 { 
+        text-align: center; 
+        margin-bottom: 20px; 
+        }
+        label { display: block; margin-top: 15px; font-weight: bold; }
+        input[type="text"], input[type="date"], input[type="number"], select, textarea, input[type="file"] {
+            width: 100%; padding: 10px; margin-top: 5px; border-radius: 4px; border: 1px solid #ccc; box-sizing: border-box;
+        }
+        textarea { resize: vertical; height: 80px; }
+        button { margin-top: 20px; padding: 12px 20px; background-color: #0c4464; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 16px; width: 100%; }
+        button:hover { background-color: #218838; }
+        #bill-image { width: 150px; height: 150px; background-image: url('images/bills.jpg'); background-size: contain; background-repeat: no-repeat; background-position: center; position: absolute; bottom: 770px; left: 500px; }
+        #logout{ position: fixed; right: 20px; top: 10px; font-size: 20px; color: #0c4464; text-decoration: none; }
+        #mydetails{ position: fixed; right: 120px; top: 10px; font-size: 20px; color: #0c4464; text-decoration: none; }
+    </style>
+</head>
+<body>
+
+    <a href="signin-page.html" id="logout">Log Out</a>
+    <a href="mydetails.html" id="mydetails">My Details</a>
+
+    <div class="form-container">
+        <div id="bill-image"></div>
+        <h2>Bill Details Form</h2>
+        <form action="php_files/bills-submit.php" method="post" enctype="multipart/form-data">
+            
+            <label for="company">Company</label>
+            <input type="text" id="company" name="company" required>
+
+            <label for="bill_name">Bill Name</label>
+            <input type="text" id="bill_name" name="bill_name" required>
+
+            <label for="bill_number">Bill Number</label>
+            <input type="text" id="bill_number" name="bill_number">
+
+            <label for="amount">Amount</label>
+            <input type="number" step="0.01" id="amount" name="amount" required>
+
+            <label for="issue_date">Issue Date</label>
+            <input type="date" id="issue_date" name="issue_date" required>
+
+            <label for="due_date">Due Date</label>
+            <input type="date" id="due_date" name="due_date" required>
+
+            <label for="payment_status">Payment Status</label>
+            <select id="payment_status" name="payment_status" required>
+                <option value="">--Select Status--</option>
+                <option value="Paid">Paid</option>
+                <option value="Pending">Pending</option>
+                <option value="Overdue">Overdue</option>
+            </select>
+
+            <label for="notes">Notes</label>
+            <textarea id="notes" name="notes" placeholder="Any additional information..."></textarea>
+
+            <label for="receipt">Upload Bill / Document</label>
+            <input type="file" id="receipt" name="receipt" accept=".pdf,.jpg,.png,.jpeg" required>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        const form = document.querySelector('form');
+        const issueInput = document.getElementById('issue_date');
+        const dueInput = document.getElementById('due_date');
+
+        // Validate due date is not before issue date
+        form.addEventListener('submit', function(e){
+            const issueDate = new Date(issueInput.value);
+            const dueDate = new Date(dueInput.value);
+
+            if(dueDate < issueDate){
+                e.preventDefault();
+                dueInput.setCustomValidity("Due date cannot be before issue date");
+                dueInput.reportValidity();
+            } else {
+                dueInput.setCustomValidity("");
+            }
+        });
+    </script>
+
+</body>
+</html>
