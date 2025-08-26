@@ -11,6 +11,7 @@ This project is a Document Management System built using HTML, CSS, PHP, and Jav
 The system provides a user-friendly interface to efficiently track and manage important documents, ensuring that no deadlines are missed.
 
 **Requirements**
+
 The storage of all these details are done using SQL and NoSQL.
 When a person signs up, the details provided by him/ her is stored in SQL and the details of his/ her documents are stored in NoSQL as it is schemaless data where some fields may have data and some may not.
 
@@ -19,21 +20,22 @@ Hence, XAMPP software for SQL and MongoDB for NoSQL must be installed to run the
 Apart from this, a code editor must be used to edit and view the codes, VS Code is Recommended. 
 
 **SQL (XAMPP) Set up**
+
 As mentioned earlier, XAMPP is used to store the useres' data, hence a database must be created, the commands for it ar as follows:
 
-To create a database, the command is:
+To create a database, to store the users data, the SQL query is:
 
 ```
 CREATE DATABASE storagereminder;
 ```
 
-To cuse the created database, the command is:
+To use the created database, the SQL query is:
 
 ```
 USE storagereminder;
 ```
 
-To create a table in the database to store all the details, the command is"
+To create a table named users in the storaereminder database to store all the details, the SQL query is:
 
 ```
 CREATE TABLE IF NOT EXISTS users (
@@ -55,9 +57,25 @@ $password_db = ""; //add your set XAMPP password
 $dbname = "storagereminder";
 ```
 
-Also modify the below line in mail_reminder.php
+Also modify the below line in mail_reminder.php just like signup-submit.php and signin-submit.php
 
 ```
 $mysqli = new mysqli(hostname:"localhost", username:"", password:"", database:"storagereminder");
 ```
 
+**NoSQL (MongoDB) Set up**
+
+A database must be created to store all the collections, the query is:
+
+```
+use storagereminder;
+```
+
+To create a collection for all types of documents, the queries are 
+
+```
+db.createCollection("warranty");
+db.createCollection("agreements");
+db.createCollection("bills");
+db.createCollection("vouchers");
+```
