@@ -48,7 +48,7 @@ extension=php_mongodb.dll
 
 4. Restart Apache and continue
 
-**SQL (XAMPP) Set up**
+## SQL (XAMPP) Set up
 
 As mentioned earlier, XAMPP is used to store the useres' data, hence a database must be created, the commands for it ar as follows:
 
@@ -92,7 +92,7 @@ Also modify the below line in mail_reminder.php just like signup-submit.php and 
 $mysqli = new mysqli(hostname:"localhost", username:"", password:"", database:"storagereminder");
 ```
 
-**NoSQL (MongoDB) Set up**
+## NoSQL (MongoDB) Set up
 
 A database must be created to store all the collections, the query is:
 
