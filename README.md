@@ -1,4 +1,4 @@
-#Document Management system
+# Document Management system
 
 **Description**
 
@@ -23,11 +23,11 @@ As mentioned earlier, XAMPP is used to store the useres' data, hence a database 
 
 To create a database, the command is:
 
-```CREATE DATABASE storagereminder;
+```CREATE DATABASE storagereminder;```
 
 To cuse the created database, the command is:
 
-```USE storagereminder;
+```USE storagereminder;```
 
 To create a table in the database to store all the details, the command is"
 
@@ -40,4 +40,4 @@ CREATE TABLE IF NOT EXISTS users (
     password VARCHAR(255) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
     created_at TIMESTAMP NOT NULL DEFAULT current_timestamp()
-);
+);```
