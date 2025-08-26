@@ -1,6 +1,6 @@
 # Document Management system
 
-**Description**
+### Description
 
 This project is a Document Management System built using HTML, CSS, PHP, and JavaScript. It allows users to sign up and sign in to securely manage their personal or business-related documents that includes warranties, bills, agreements, and vouchers. Users can:
 
@@ -10,14 +10,14 @@ This project is a Document Management System built using HTML, CSS, PHP, and Jav
    
 The system provides a user-friendly interface to efficiently track and manage important documents, ensuring that no deadlines are missed.
 
-**Requirements**
+### Technologies Used
 
-The storage of all these details are done using SQL and NoSQL.
-When a person signs up, the details provided by him/ her is stored in SQL and the details of his/ her documents are stored in NoSQL as it is schemaless data where some fields may have data and some may not.
+- HTML, CSS, JavaScript
+- PHP for server-side scripting
+- MySQL (XAMPP) for relational data to store details of the users
+- MongoDB for NoSQL document storage as not all fields will be filled
+- VS Code recommended for code editing
 
-Hence, XAMPP software for SQL and MongoDB for NoSQL must be installed to run the codes.
-
-Apart from this, a code editor must be used to edit and view the codes, VS Code is Recommended. 
 
 **SQL (XAMPP) Set up**
 
@@ -79,3 +79,29 @@ db.createCollection("agreements");
 db.createCollection("bills");
 db.createCollection("vouchers");
 ```
+
+### Usage
+
+1. Open the homepage.
+2. Sign up as a new user.
+3. Sign in using your credentials.
+4. Add documents such as warranties, bills, agreements, or vouchers.
+5. Receive email reminders for expiry or due dates.
+6. Add and remove documents as needed.
+
+### Features
+
+- User registration and login system
+- Add and delete documents
+- Automated email reminders
+- SQL database for user data
+- MongoDB (NoSQL) database for documents
+- User-friendly interface
+
+### Future Improvements
+
+- Add authentication with JWT for better security
+- Implement search and filter options for documents
+- Use AI to extract data directly from images or PDFs when uploaded
+- Make the UI more responsive and mobile-friendly
+
