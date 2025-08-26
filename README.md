@@ -18,6 +18,36 @@ The system provides a user-friendly interface to efficiently track and manage im
 - MongoDB for NoSQL document storage as not all fields will be filled
 - VS Code recommended for code editing
 
+### Dependencies
+
+Before running the project, make sure the following are installed and configured:
+
+1. Composer (PHP package manager)
+Download and install Composer from https://getcomposer.org/download/
+Check installation:
+```
+composer --version
+```
+
+2. PHPMailer (for sending email reminders)
+Navigate to your project folder in terminal:
+```
+cd path/to/your/project
+```
+Install PHPMailer via Composer:
+```
+composer require phpmailer/phpmailer
+```
+
+3. MongoDB PHP Extension
+Open your php.ini file (usually in C:\xampp\php\php.ini)
+Add or uncomment:
+```
+extension=php_mongodb.dll
+```
+
+4. Restart Apache and continue
+
 **SQL (XAMPP) Set up**
 
 As mentioned earlier, XAMPP is used to store the useres' data, hence a database must be created, the commands for it ar as follows:
