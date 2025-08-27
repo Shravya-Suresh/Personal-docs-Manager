@@ -148,3 +148,10 @@ db.createCollection("vouchers");
 - Use AI to extract data directly from images or PDFs when uploaded
 - Make the UI more responsive and mobile-friendly
 
+## 🎥 Demo
+
+▶ [Watch the Demo Video](https://drive.google.com/file/d/1_vW9GMDY9Erroz9aaDS4m6AH5FpUFtuh/view?usp=sharing)
+
+**Please note that this video already had some set ups done before, hence some steps are not the in the video, please make sure to read all instructions carefuuly before cloning the project.**
+
+The mails can also be sent, the code for it is written in mail_reminder.php, the iplaoded files can be viewed by created a folder called uplaod in the project folder.
