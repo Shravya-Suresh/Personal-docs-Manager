@@ -4,8 +4,8 @@ session_start();
 
 // Database connection
 $servername = "localhost";
-$username_db = "root";
-$password_db = "";
+$username_db = ""; // your XAMPP user
+$password_db = "";     // password
 $dbname = "storagereminder";
 
 $conn = new mysqli($servername, $username_db, $password_db, $dbname);

@@ -1,9 +1,9 @@
 <?php
 // Database connection
 $servername = "localhost";
-$username_db = "root"; // your XAMPP user
-$password_db = "";     // empty if no password
-$dbname = "storagereminder"; // replace with your database name
+$username_db = ""; // your XAMPP user
+$password_db = "";     // password
+$dbname = "storagereminder"; 
 
 $conn = new mysqli($servername, $username_db, $password_db, $dbname);
 if ($conn->connect_error) {

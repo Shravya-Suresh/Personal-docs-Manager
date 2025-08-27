@@ -30,6 +30,8 @@ try {
     echo json_encode($bills);
 
 } catch (Exception $e) {
+    // echo json_encode(["error" => "Error fetching bill details: " . $e->getMessage()]);
     echo json_encode(["error" => "Error fetching bill details: " . $e->getMessage()]);
+
 }
 ?>

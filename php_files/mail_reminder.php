@@ -6,7 +6,7 @@ use PHPMailer\PHPMailer\Exception;
 // ------------------------
 // MySQL connection (users table)
 // ------------------------
-$mysqli = new mysqli("localhost", "root", "", "your_mysql_db_name");
+$mysqli = new mysqli("localhost", "", "", "storagereminder");
 if ($mysqli->connect_errno) {
     die("Failed to connect to MySQL: " . $mysqli->connect_error);
 }
