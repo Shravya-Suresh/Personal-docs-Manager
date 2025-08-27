@@ -23,7 +23,11 @@ The system provides a user-friendly interface to efficiently track and manage im
 Before running the project, make sure the following are installed and configured:
 
 1. Composer (PHP package manager)
-Download and install Composer from https://getcomposer.org/download/
+Download from https://getcomposer.org/download/ and install it with the follwoing command
+```
+composer install
+```
+
 Check installation:
 ```
 composer --version
